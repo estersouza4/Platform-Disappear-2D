@@ -96,24 +96,25 @@ public class PlatformSpawnerLateral : MonoBehaviour
         }
     }
     void TrySpawnEnemy(GameObject platform)
-    {
-        if (enemyPrefab == null) return;
-        if (player == null) return;
+{
+    if (enemyPrefab == null) return;
+    if (player == null) return;
 
-        if (totalPlatformsSpawned <= platformsBeforeEnemies)
-            return;
+    if (totalPlatformsSpawned <= platformsBeforeEnemies)
+        return;
 
-        if (Random.value > enemyChance)
-            return;
+    if (Random.value > enemyChance)
+        return;
 
-        float distanceToPlayer = platform.transform.position.x - player.position.x;
+    Vector3 enemyPos = platform.transform.position + new Vector3(0f, 1.5f, 0f);
 
-        if (distanceToPlayer < minEnemySpawnDistanceFromPlayer)
-            return;
+    float distanceX = Mathf.Abs(enemyPos.x - player.position.x);
 
-        Vector3 enemyPos = platform.transform.position + new Vector3(0f, 1.5f, 0f);
-        Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
-    }
+    if (distanceX < minEnemySpawnDistanceFromPlayer)
+        return;
+
+    Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+}
     void CleanupPlatforms()
     {
         for (int i = spawnedPlatforms.Count - 1; i >= 0; i--)

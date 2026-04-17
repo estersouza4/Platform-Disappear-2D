@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6862370983436312839}
   - component: {fileID: 5915502521632674196}
   - component: {fileID: 1910875625458770511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatformDisappear
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &1910875625458770511
 MonoBehaviour:

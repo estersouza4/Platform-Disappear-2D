@@ -1,14 +1,11 @@
-using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float speed = 2f;
-    public float respawnTime = 4f;
 
-    private Vector3 startPosition;
-    private Vector3 originalScale;
     private bool isDead = false;
+    private Vector3 originalScale;
 
     private SpriteRenderer sr;
     private Collider2D col;
@@ -16,7 +13,6 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        startPosition = transform.position;
         originalScale = transform.localScale;
 
         sr = GetComponent<SpriteRenderer>();
@@ -25,12 +21,14 @@ public class Enemy : MonoBehaviour
 
         OlharParaEsquerda();
     }
+
     void Update()
     {
         if (isDead) return;
 
         transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
+
     void OlharParaEsquerda()
     {
         transform.localScale = new Vector3(
@@ -39,42 +37,27 @@ public class Enemy : MonoBehaviour
             originalScale.z
         );
     }
-    public void Defeat()
-    {
-        if (isDead) return;
-        StartCoroutine(Respawn());
-    }
-    IEnumerator Respawn()
-    {
-        isDead = true;
+   public void Defeat()
+{
+    if (isDead) return;
 
-        if (sr != null) sr.enabled = false;
-        if (col != null) col.enabled = false;
-        if (rb != null) rb.simulated = false;
+    isDead = true;
 
-        yield return new WaitForSeconds(respawnTime);
+    GameManager.instance?.AddScore(10);
 
-        transform.position = startPosition;
-        OlharParaEsquerda();
-
-        if (sr != null) sr.enabled = true;
-        if (col != null) col.enabled = true;
-        if (rb != null) rb.simulated = true;
-
-        isDead = false;
-    }
+    Destroy(gameObject);
+}
 
     void OnTriggerEnter2D(Collider2D collision)
-{
-
-    if (collision.gameObject.CompareTag("Player"))
     {
-        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-
-        if (player != null)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            player.Die();
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+
+            if (player != null)
+            {
+                player.Die();
+            }
         }
     }
-}
 }
