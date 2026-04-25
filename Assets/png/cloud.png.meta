@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 08669b7a1e6093748b8d15250782c6b8
+guid: 472ec4a20f7c3ed4aad00b3c25c7d3d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4815476061570213978
-    second: star_0
+      213: -6981827254641702772
+    second: cloud_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -87,12 +87,12 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 12
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: star_0
+      name: cloud_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 14
-        width: 203
-        height: 202
+        x: 48
+        y: 69
+        width: 525
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a582a4ae6f104d240800000000000000
-      internalID: 4815476061570213978
+      spriteID: c88c0fb6a119b1f90800000000000000
+      internalID: -6981827254641702772
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      star_0: 4815476061570213978
+      cloud_0: -6981827254641702772
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

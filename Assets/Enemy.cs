@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
-        OlharParaEsquerda();
     }
 
     void Update()
@@ -29,14 +28,6 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
-    void OlharParaEsquerda()
-    {
-        transform.localScale = new Vector3(
-            -Mathf.Abs(originalScale.x),
-            originalScale.y,
-            originalScale.z
-        );
-    }
    public void Defeat()
 {
     if (isDead) return;

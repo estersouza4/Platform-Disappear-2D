@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,11 +25,26 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 escalaOriginal;
     private bool olhandoParaDireita = true;
 
+    [Header("Pulo Especial")]
+    public float energiaMaxima = 100f;
+    public float energiaAtual = 100f;
+    public float custoPuloDuplo = 100f;
+    public float regeneracaoEnergia = 15f;
+    public bool podeUsarPuloDuplo = true;
+
+    public Slider energySlider;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         escalaOriginal = transform.localScale;
+    
+        if (energySlider != null)
+        {
+            energySlider.maxValue = energiaMaxima;
+            energySlider.value = energiaAtual;
+        }   
     }
 
     void Update()
@@ -37,6 +53,22 @@ public class PlayerMovement : MonoBehaviour
         float currentSpeed = speed;
 
         estaSeMovendo = move != 0; 
+
+        energiaAtual += regeneracaoEnergia * Time.deltaTime;
+
+        if (energiaAtual > energiaMaxima)
+        {
+            energiaAtual = energiaMaxima;
+        }
+        if (energySlider != null)
+        {   
+            energySlider.value = energiaAtual;
+        }
+
+        if (isGrounded)
+        {
+            podeUsarPuloDuplo = true;
+        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -81,12 +113,26 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            PuloDuploEspecial();
+        }
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             Atirar();
         }
     }
+    void PuloDuploEspecial()
+    {
+        if (!isGrounded && podeUsarPuloDuplo && energiaAtual >= energiaMaxima)
+        {
+            energiaAtual = 0f;
+            podeUsarPuloDuplo = false;
 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
     void Atirar()
     {
         Debug.Log("Tentando atirar...");
@@ -121,30 +167,42 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool morreu = false;
+
     public void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (morreu) return;
+
+        morreu = true;
+
+        GameOverMenu gameOver = FindAnyObjectByType<GameOverMenu>();
+
+        if (gameOver != null)
+        {
+            gameOver.MostrarGameOver();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+    if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("GroundStart"))
+    {
+        if (anim != null)
         {
-            if (anim != null)
-            {
-                anim.SetBool("isJumping", false);
-            }
-        }
-        if (collision.gameObject.CompareTag("GroundStart")) // NOVO
-        {
-            estaNoGroundStart = true;
-        }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Die();
+            anim.SetBool("isJumping", false);
         }
     }
+
+    if (collision.gameObject.CompareTag("GroundStart"))
+    {
+        estaNoGroundStart = true;
+    }
+
+    if (collision.gameObject.CompareTag("Enemy"))
+    {
+        Die();
+    }
+  }
     void OnCollisionExit2D(Collision2D collision)
 {
     if (collision.gameObject.CompareTag("GroundStart"))

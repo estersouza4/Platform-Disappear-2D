@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4545810011973828512}
   - component: {fileID: 3931186201949673589}
   - component: {fileID: 2960312190652448509}
+  - component: {fileID: 8272174558246934653}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.6, y: 1.55, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7697893346218306476, guid: 4ef521a7298a3054e98be6160d186540, type: 3}
+  m_Sprite: {fileID: -2579405350870725321, guid: b8cb6b7b470641e4fad75c89b4a9da93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -160,7 +161,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.625, y: 1.6875}
+    oldSize: {x: 6.87, y: 5.91}
     newSize: {x: 0.26, y: 0.27}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   speed: 1.5
-  respawnTime: 4
 --- !u!95 &2960312190652448509
 Animator:
   serializedVersion: 7
@@ -204,3 +204,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8272174558246934653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340179465282562082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe628c2493efdb14eb1a59bd3773dc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
+  velocidade: 2
+  distanciaParaPerseguir: 8
